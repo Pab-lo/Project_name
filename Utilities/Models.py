@@ -101,47 +101,6 @@ class ForecastingModelCat(ForecastingModel):
         softy_out = self.softy(linear_dropout_out)
         
         return softy_out
-        
-
-# A generic RNN/GRU/LSTM implementation for classification
-# class ForecastingModelCat(nn.Module):
-    
-#     def __init__(self, data_dim, hidden_dim, num_layers, model_type = 'RNN', drop_prob = 0., num_classes = 3):
-        
-#         super(ForecastingModelCat, self).__init__()
-        
-#         self.name = f"{data_dim}_{hidden_dim}_{num_layers}_{model_type}"
-        
-#         # Recurrent component
-#         if model_type == 'RNN':
-#             self.core_layers = nn.RNN(data_dim, hidden_dim, num_layers, batch_first = True, dropout = drop_prob)
-#         elif model_type == 'GRU':
-#             self.core_layers = nn.GRU(data_dim, hidden_dim, num_layers, batch_first = True, dropout = drop_prob)
-#         elif model_type == 'LSTM':
-#             self.core_layers = nn.LSTM(data_dim, hidden_dim, num_layers, batch_first = True, dropout = drop_prob)
-#         else:
-#             raise ValueError("ForecastingModel.__init__: unrecognised model type.")
-        
-#         # Linear output
-#         self.output_layer = nn.Linear(hidden_dim, num_classes)
-        
-#         # Dropout layers
-#         self.last_rnn_layer_dropout = torch.nn.Dropout(p = drop_prob)
-#         self.linear_dropout = torch.nn.Dropout(p = drop_prob)
-            
-#         # Softmax
-#         self.softy = torch.nn.Softmax(dim = 1)
-        
-        
-#     def forward(self, x_sequence):
-        
-#         core_out, hidden_neurons = self.core_layers(x_sequence)
-#         last_rnn_layer_dropout_out = self.last_rnn_layer_dropout(core_out)
-#         linear_out = self.output_layer(last_rnn_layer_dropout_out[:, last_rnn_layer_dropout_out.size(1) - 1, :])
-#         linear_dropout_out = self.linear_dropout(linear_out)
-#         softy_out = self.softy(linear_dropout_out)
-        
-#         return softy_out
 
 
 
