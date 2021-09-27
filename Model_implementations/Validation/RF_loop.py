@@ -71,11 +71,8 @@ def rf_run(label_name, num_lags, n_estimators, max_depth, min_samples_leaf, max_
 
 all_pairs = ["GBPUSD Curncy", "EURUSD Curncy", "USDJPY Curncy", "AUDUSD Curncy", "USDCHF Curncy", "XAUUSD Curncy", "XAGUSD Curncy", "AUDJPY Curncy", "NOKUSD Curncy", "SEKUSD Curncy", "USDMXN Curncy", "NZDUSD Curncy"]
 
-num_lags = 100
+num_lags = 15
 n_estimators = 100
-#max_depth = 2
-#min_samples_leaf = 1
-#max_features = 'sqrt'
 diff_mode = 'logret'
 smoothing = False
 scaling = False
@@ -90,10 +87,6 @@ start = time.perf_counter()
 for max_depth in [2, 5, None]:
     for min_samples_leaf in [1, 150, 750]:
         for max_features in ['auto', 'sqrt', 10]:
-            
-            max_depth = 2
-            min_samples_leaf = 1
-            max_features = 'sqrt'
 
             for pair in all_pairs:
 

@@ -33,9 +33,6 @@ data_test_df = data_test_df[[label_name]]
 # Choose start point in training set (ARIMA needs at least a few points)
 arima_start = 20
 
-# data_train_df = data_train_df[-50:]
-# data_val_df = data_val_df[:20]
-
 # Get labels
 Y_train = take_log_returns_np(data_train_df.to_numpy())[arima_start:]
 Y_val = take_log_returns_np(data_val_df.to_numpy())
@@ -67,14 +64,7 @@ for pred_idx in range(arima_start, X_train.shape[0]):
     model_fit = model.fit(method_kwargs = {"warn_convergence": False})
     Y_pred = np.append(Y_pred, model_fit.forecast()[0])
     X_running = np.append(X_running, X_train[pred_idx])
-    
-    #print("X_running", X_running)
-    #print("Y_pred", Y_pred)
-    
-    if pred_idx + 1 % 50 == 0 and pred_idx > 0:
-        print(f"{pred_idx + 1} training points done")
 
-#print(Y_pred.shape)
 
 print(f"Training model and predicting on validation set...")
 
@@ -84,14 +74,7 @@ for pred_idx in range(X_val.shape[0]):
     model_fit = model.fit(method_kwargs = {"warn_convergence": False})
     Y_pred = np.append(Y_pred, model_fit.forecast()[0])
     X_running = np.append(X_running, X_val[pred_idx])
-    
-    #print("X_running", X_running)
-    #print("Y_pred", Y_pred)
-    
-    if pred_idx + 1 % 50 == 0 and pred_idx > 0:
-        print(f"{pred_idx + 1} validation points done")
 
-#print(Y_pred.shape)
 
 # End timer
 end = time.perf_counter()
